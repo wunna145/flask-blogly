@@ -2,6 +2,7 @@
 
 from flask import Flask, request, redirect, render_template
 from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy import inspect
 from models import db, connect_db, User
 
 app = Flask(__name__)
@@ -13,15 +14,17 @@ toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 with app.app_context():
-    db.create_all()
+    inspector = inspect(db.engine)
+    if not inspector.has_table('users'):
+        db.create_all()
 
 @app.route("/")
 def root():
     return redirect("/users")
 
-@app.route("/users")
+@app.route("/users", methods=["GET"])
 def users():
-    users = User.query.order_by(User.first_name, User.last_name).all()
+    users = User.query.all()
     return render_template('/users/user_list.html', users = users)
 
 @app.route("/users/new", methods=["GET"])
