@@ -9,11 +9,11 @@
         <li>
             <a href="/users/{{user.id}}">{{user.full_name}}</a>
         </li>
-        {% end for %}
+        {% endfor %}
     </ul>
 {% else %}
     <p>There is no user yet!</p>
-{% endif%}
+{% endif %}
 <p><a href="/users/new">Add user</a></p>
 
 {% endblock %}
