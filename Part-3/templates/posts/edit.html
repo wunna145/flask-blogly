@@ -7,10 +7,26 @@
         <label>Title</label>
         <input name="title" value="{{post.title}}">
     </div>
+
     <div>
         <label>Post Content</label>
         <textarea name="content">{{post.content}}</textarea>
     </div>
+
+    <div>
+        {% for tag in tags %}
+        <div>
+            <input
+                type="checkbox"
+                value="{{tag.id}}"
+                {% if tag in post.tags %} checked {% endif %}
+                name="tags"
+            >
+            <label>{{tag.name}}</label>
+        </div>
+        {% endfor %}
+    </div>
+
     <div>
         <a href="/users/{{post.user_id}}">Cancel</a>
         <button type="submit">Submit</button>

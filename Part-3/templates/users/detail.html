@@ -12,11 +12,10 @@
         <h1>{{ user.full_name }}</h1>
         <form>
             <button formaction="/users/{{user.id}}/edit" formmethod="GET">Edit</button>
-        </form>
-        <form>
             <button formaction="/users/{{user.id}}/delete" formmethod="POST">Delete</button>
+            <a href="/">Back</a>
         </form>
-    </div>
+        </div>
 
     <div>
         <h1>Posts</h1>
