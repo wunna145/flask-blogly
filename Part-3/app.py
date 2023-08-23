@@ -74,13 +74,13 @@ def delete(user_id):
 
     return redirect("/users")
 
-@app.route("/users/<int:user_id>/posts/new", methods=["POST"])
+@app.route("/users/<int:user_id>/posts/new", methods=["GET"])
 def new_form(user_id):
     user = User.query.get_or_404(user_id)
     tags = Tag.query.all()
     return render_template("/posts/new.html", user=user, tags=tags)
 
-@app.route("/users/<int:user_id>/posts/new/add", methods=["POST"])
+@app.route("/users/<int:user_id>/posts/new", methods=["POST"])
 def new_post(user_id):
     new = Post(
         title = request.form['title'],
